@@ -1,0 +1,42 @@
+CREATE TABLE `MEMBER` ( --사용자 테이블
+   `user_tel` INT PRIMARY KEY, --사용자 전화번호(PK)
+   `user_pw` VARCHAR(20) NOT NULL, --사용자 비밀번호
+   `sign_date` VARCHAR(20) NOT NULL, --가입일시
+   `remain_time` NOT NULL --남은시간
+);
+
+CREATE TABLE `MANAGER` ( --관리자 테이블
+`manager_id` VARCHAR(20) PRIMARY KEY, --관리자 ID(PK)
+`manager_pw` VARCHAR(20) NOT NULL, --관리자 비밀번호
+`manager_name` VARCHAR(20) NOT NULL, --관리자 이름
+`manager_tel` VARCHAR(20) NOT NULL, --관리자 전화번호
+`manager_email` VARCHAR(50) NOT NULL --관리자 이메일
+);
+
+CREATE TABLE `SEAT` ( --좌석 테이블
+`seat_num` INT PRIMARY KEY, --좌석번호(PK)
+`seat_avail` BOOLEAN NOT NULL, --사용가능 여부
+);
+
+CREATE TABLE `PAY` ( --결제 테이블
+`pay_num` INT PRIMARY KEY, --결제번호(PK)
+`user_tel` VARCHAR(20) NOT NULL, --유저 전화번호(FK)
+`pay_date` DATE NOT NULL, --결제 일시
+`time_paid` DATE NOT NULL, --구매한 시간
+`payment` INT NOT NULL --결제비용
+);
+
+
+CREATE TABLE `USE` ( --사용 테이블
+`use_num` INT PRIMARY KEY, --사용번호(PK)
+`checkin_time` DATE NOT NULL, --입실시간
+`checkout_time` DATE NOT NULL, --퇴실시간
+`user_tel` VARCHAR(20) NOT NULL, --사용자 전화번호(FK)
+`seat_num` INT NOT NULL, --좌석번호(FK)
+`use_time` DATE NOT NULL --사용시간(퇴실시간-입실시간)
+);
+
+CREATE TABLE `CHARGE` ( --요금제 테이블
+  `charge_time` INT AUTO_INCREMENT PRIMARY KEY, --요금제 시간(PK)
+  `charge` INT --요금제 요금
+);

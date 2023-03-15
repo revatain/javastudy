@@ -1,0 +1,54 @@
+CREATE TABLE JOINTABLE (
+   USERPHONENUMBER VARCHAR(20) PRIMARY KEY,
+   PASS VARCHAR(20) NOT NULL,
+   SINGDATE VARCHAR(20) NOT NULL,
+   COUNTDOWN DATE NULL
+);
+
+
+
+CREATE TABLE MANAGER (
+manager_id VARCHAR(20) PRIMARY KEY,
+manager_pass VARCHAR(20) NOT NULL,
+manager_name VARCHAR(20) NOT NULL,
+manager_phonenumber VARCHAR(20) NOT NULL,
+manager_email VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE SEAT (
+seat_num INT PRIMARY KEY,
+seat_avail BOOLEAN NOT NULL,
+user_phonenum VARCHAR(20),
+
+FOREIGN KEY SEAT(user_phonenum) REFERENCES jointable(USERPHONENUMBER)
+);
+
+CREATE TABLE PAYTABLE (
+pay_num INT PRIMARY KEY,
+user_phonenum VARCHAR(20) NOT NULL,
+pay_date DATE NOT NULL,
+pay_time DATE NOT NULL,
+pay_ment INT NOT NULL,
+
+FOREIGN KEY PAYTABLE(user_phonenum) REFERENCES jointable(USERPHONENUMBER),
+FOREIGN KEY PAYTABLE2(pay_ment) REFERENCES FEE(fee_payment)
+);
+
+
+CREATE TABLE USETABLE (
+sayong_num INT PRIMARY KEY,
+check_intime DATE NOT NULL,
+check_outtime DATE NOT NULL,
+user_phonenumber VARCHAR(20),
+seat_num INT,
+sayong_time DATE NOT NULL,
+
+FOREIGN KEY USETABLE1(user_phonenumber) REFERENCES jointable(USERPHONENUMBER),
+FOREIGN KEY USETABLE2(seat_num) REFERENCES seat(seat_num)
+);
+
+CREATE TABLE FEE
+(
+fee_timing INT PRIMARY KEY,
+fee_payment INT UNIQUE
+);
